@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// Runs first, so the movement scripts always read this frame's input.
+[DefaultExecutionOrder(-100)]
 public class PlayerInputHandler : MonoBehaviour
 {
     [Header("Input Asset Link")]
