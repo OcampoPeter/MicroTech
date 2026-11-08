@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 // Corruption is our health system. 0% = healthy, 100% = the PC crashes.
@@ -11,8 +9,6 @@ public class CorruptionSystem : MonoBehaviour
 
     [Header("UI")]
     public TMP_Text corruptionText;
-    [Tooltip("The blue crash panel. Leave it turned OFF in the Hierarchy at the start.")]
-    public GameObject crashPanel;
 
     [Header("Settings")]
     public float maxCorruption = 100f;
@@ -22,22 +18,7 @@ public class CorruptionSystem : MonoBehaviour
 
     void Awake() { Instance = this; }
 
-    void Start()
-    {
-        Time.timeScale = 1f;
-        if (crashPanel != null) crashPanel.SetActive(false);
-        UpdateText();
-    }
-
-    void Update()
-    {
-        // While crashed, wait for R. Update still runs even though time is frozen.
-        if (IsCrashed && Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
-        {
-            Time.timeScale = 1f;   // un-freeze before reloading
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-    }
+    void Start() { UpdateText(); }
 
     public void AddCorruption(float amount)
     {
@@ -52,8 +33,9 @@ public class CorruptionSystem : MonoBehaviour
     void Crash()
     {
         IsCrashed = true;
-        Time.timeScale = 0f;   // freezes the game
-        if (crashPanel != null) crashPanel.SetActive(true);
+        // The Game Manager shows the blue screen and freezes the game
+        if (GameManager.Instance != null)
+            GameManager.Instance.SetState(GameState.Crashed);
     }
 
     void UpdateText()

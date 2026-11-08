@@ -43,6 +43,8 @@ public class ScoreSystem : MonoBehaviour
     {
         if (IsFinished) return;
         IsFinished = true;
+        if (GameManager.Instance != null)
+            GameManager.Instance.SetState(GameState.Complete);
 
         RunTimer timer = RunTimer.Instance;
         timer.Stop();
