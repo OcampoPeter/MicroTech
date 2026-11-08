@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     public float airAcceleration = 20f;
     [Tooltip("How fast you lose momentum in the air with no input. Low = you keep drifting.")]
     public float airDeceleration = 6f;
+    [Tooltip("Extra strength when you steer AGAINST your current direction in the air. Higher = easier to turn around mid-jump.")]
+    public float airReverseMultiplier = 3f;
     [Tooltip("How fast the character turns to face where it moves (degrees per second).")]
     public float rotationSpeed = 720f;
 
@@ -43,6 +45,16 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("How fast the sideways push fades once you are on the ground.")]
     public float groundPushDecay = 40f;
 
+    [Header("Air Time Boost")]
+    [Tooltip("Seconds in the air before you start gaining extra speed.")]
+    public float airBoostDelay = 0.6f;
+    [Tooltip("Extra speed gained per second of air time (meters per second, per second).")]
+    public float airSpeedGain = 3f;
+    [Tooltip("The most bonus speed you can gain from air time.")]
+    public float maxAirBonus = 8f;
+    [Tooltip("How fast the bonus fades after you land.")]
+    public float airBonusFadeOnLand = 30f;
+
     [Header("High Fall Momentum")]
     public float fallSpeedThreshold = 12f;
     public float momentumCarryFactor = 0.4f;
@@ -51,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
     public float HorizontalSpeed { get; private set; }
 
     private float currentSpeed;
+    private float airTime;                // seconds since you left the ground
+    private float airBonus;               // extra speed earned from air time
     private float highestFallSpeedThisJump;
     private Vector3 push;                 // sideways push that fades out by itself
     private Vector3 horizontalVelocity;   // the real sideways speed, smoothed
@@ -99,10 +113,25 @@ public class PlayerMovement : MonoBehaviour
         horizontalVelocity = Vector3.zero;
         currentSpeed = walkSpeed;
         highestFallSpeedThisJump = 0f;
+        airTime = 0f;
+        airBonus = 0f;
     }
 
     void Update()
     {
+        // Air time keeps counting while wall running too, so a long chain of jumps and wall runs keeps building speed
+        if (controller.isGrounded)
+        {
+            airTime = 0f;
+            airBonus = Mathf.MoveTowards(airBonus, 0f, airBonusFadeOnLand * Time.deltaTime);
+        }
+        else
+        {
+            airTime += Time.deltaTime;
+            if (airTime > airBoostDelay)
+                airBonus = Mathf.MoveTowards(airBonus, maxAirBonus, airSpeedGain * Time.deltaTime);
+        }
+
         // CRUCIAL: the wall run script moves the player while wall running, so skip this movement math
         if (wallRun != null && wallRun.IsWallRunning) return;
 
@@ -147,7 +176,7 @@ public class PlayerMovement : MonoBehaviour
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-            desiredVelocity = moveDir.normalized * currentSpeed;
+            desiredVelocity = moveDir.normalized * (currentSpeed + airBonus);
 
             // Turn the model gradually instead of snapping
             Quaternion targetRotation = Quaternion.Euler(0f, targetAngle + modelRotationOffset, 0f);
@@ -159,6 +188,10 @@ public class PlayerMovement : MonoBehaviour
         float accel;
         if (controller.isGrounded) accel = hasDesired ? groundAcceleration : groundDeceleration;
         else accel = hasDesired ? airAcceleration : airDeceleration;
+
+        // Holding the opposite direction in the air brakes and turns you around faster
+        if (!controller.isGrounded && hasDesired && Vector3.Dot(horizontalVelocity, desiredVelocity) < 0f)
+            accel *= airReverseMultiplier;
         horizontalVelocity = Vector3.MoveTowards(horizontalVelocity, desiredVelocity, accel * Time.deltaTime);
 
         // Jump (with a little grace time so it never feels like it ignored you)
