@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MazePart/RAM.unity
     guid: fab39b2b236d0014cb1ac9d8ddc6fcf5
   - enabled: 1
-    path: Assets/Scenes/MazePart/TS Room.unity
+    path: Assets/Scenes/TS Room.unity
     guid: 2e97b70f7d855cf42b5beda5ae0d4c66
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
