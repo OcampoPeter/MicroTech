@@ -33,6 +33,9 @@ public class ItemGrabber : MonoBehaviour
     // Other scripts can check this while the item is being rotated
     public static bool IsRotatingItem;
 
+    // True while the player carries an item
+    public bool IsHolding { get { return held != null; } }
+
     private Grabbable held;
     private Rigidbody heldBody;
     private bool heldWasKinematic;
@@ -119,7 +122,7 @@ public class ItemGrabber : MonoBehaviour
     // Turns the mouse look of every Cinemachine camera on or off
     void SetCameraInput(bool on)
     {
-        var controllers = FindObjectsByType<Unity.Cinemachine.CinemachineInputAxisController>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        var controllers = FindObjectsByType<Unity.Cinemachine.CinemachineInputAxisController>(FindObjectsInactive.Include);
         foreach (var c in controllers) c.enabled = on;
     }
 
