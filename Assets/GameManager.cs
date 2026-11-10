@@ -34,8 +34,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        // After the game ends, R restarts. Update still runs while time is frozen.
-        if (State != GameState.Playing && Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
+        // On the blue (crash) screen, R restarts the maze. Update still runs while time is frozen.
+        // On the complete screen R does nothing: use the RETURN button instead.
+        if (State == GameState.Crashed && Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
             Restart();
     }
 
@@ -55,6 +56,21 @@ public class GameManager : MonoBehaviour
             if (completePanel != null) completePanel.SetActive(true);
             Time.timeScale = 0f;
         }
+    }
+
+    [Header("Where Return goes if no scene was remembered")]
+    public string fallbackReturnScene = "TS Room";
+
+    // The Return button on the complete screen calls this.
+    // The part you just fixed is saved as fixed, then you go back to the TS room.
+    public void ReturnToTS()
+    {
+        if (State == GameState.Complete)
+            PartRepair.MarkCurrentFixed();
+
+        string scene = string.IsNullOrEmpty(MapPortal.ReturnScene) ? fallbackReturnScene : MapPortal.ReturnScene;
+        Time.timeScale = 1f;   // un-freeze before loading
+        SceneManager.LoadScene(scene);
     }
 
     public void Restart()

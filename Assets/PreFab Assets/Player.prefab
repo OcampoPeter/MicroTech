@@ -583,7 +583,7 @@ MonoBehaviour:
   airReverseMultiplier: 3
   rotationSpeed: 1080
   gravity: -19.62
-  jumpHeight: 2.5
+  jumpHeight: 5
   coyoteTime: 0.12
   jumpBufferTime: 0.12
   velocity: {x: 0, y: 0, z: 0}
@@ -670,10 +670,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CursorController
   toggleKey: 53
   startLocked: 1
-  crosshairColor: {r: 1, g: 1, b: 1, a: 1}
-  crosshairLength: 16
-  crosshairThickness: 2
-  crosshairGap: 4
+  dotColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineColor: {r: 0, g: 0, b: 0, a: 0.8}
+  dotSize: 3
+  outlineThickness: 2
 --- !u!4 &4406921439311355843 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5ead1b795bed38c4aa0df73dbad68493, type: 3}
