@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5142219832683586719}
   - component: {fileID: 145509500090917591}
   - component: {fileID: 3570681810928574594}
+  - component: {fileID: 1966357764009212197}
   m_Layer: 0
   m_Name: RAM
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6392602020505518903}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.06, z: 0}
   m_LocalScale: {x: 1, y: 1.5, z: 0.6}
   m_ConstrainProportionsScale: 0
@@ -171,3 +172,20 @@ MonoBehaviour:
   sceneToLoad: RAM
   interactKey: 19
   loadDelay: 2
+--- !u!114 &1966357764009212197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6392602020505518903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e884a7c55785fa41ae7f869752ccabc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PartState
+  partId: RAM
+  brokenColor: {r: 1, g: 0.35, b: 0.35, a: 1}
+  fixedColor: {r: 0.45, g: 1, b: 0.55, a: 1}
+  showWhenBroken: []
+  showWhenFixed: []
