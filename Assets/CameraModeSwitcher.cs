@@ -6,8 +6,6 @@ public enum CameraMode
     ThirdPerson
 }
 
-// Put this on the Player. It switches between two Cinemachine cameras.
-// Set "Start Mode" differently in each scene: FirstPerson in the TS area, ThirdPerson in the mazes.
 public class CameraModeSwitcher : MonoBehaviour
 {
     public static CameraModeSwitcher Instance;

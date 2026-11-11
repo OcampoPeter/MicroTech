@@ -1,6 +1,5 @@
 using UnityEngine;
 
-// Step 2b: a hazard (lava, spikes, laser). Turn on "Is Trigger" on its collider.
 public class Hazard : MonoBehaviour
 {
     [Tooltip("Seconds added to your time when you touch it.")]

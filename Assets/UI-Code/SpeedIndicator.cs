@@ -1,8 +1,6 @@
 using UnityEngine;
 using TMPro;
 
-// Shows your speed on screen. White = normal, yellow = past sprint speed, red = really fast.
-// Put this on the speed text (a TextMeshPro text on your Canvas).
 public class SpeedIndicator : MonoBehaviour
 {
     [Header("References")]

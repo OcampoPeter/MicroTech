@@ -7,8 +7,6 @@ public enum POVBlockAction
     ThirdPerson
 }
 
-// Put this on a block (a cube). Turn on "Is Trigger" on its collider.
-// When the player steps into it, the camera mode changes.
 public class POVSwitchBlock : MonoBehaviour
 {
     public POVBlockAction action = POVBlockAction.Toggle;
