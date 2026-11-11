@@ -26,6 +26,7 @@ public class ScoreSystem : MonoBehaviour
     [Tooltip("Only used when you press Play directly in this maze scene (no part carried in). 0 = use 1.")]
     public int directPlayDifficulty = 0;
 
+    // Worked out from the difficulty of the part you came from (1 if you started this scene directly)
     public int Difficulty { get; private set; }
     public float CurrentPar { get; private set; }
 
@@ -34,12 +35,14 @@ public class ScoreSystem : MonoBehaviour
     public int BestScore { get; private set; }
     public bool IsNewBest { get; private set; }
 
-    private const string BestKey = "BestScore";   
+    private const string BestKey = "BestScore";   // the name the score is saved under
+    public bool IsFinished { get; private set; }
+
     void Awake() { Instance = this; }
 
     void Start()
     {
-        BestScore = PlayerPrefs.GetInt(BestKey, 0);   
+        BestScore = PlayerPrefs.GetInt(BestKey, 0);   // 0 if nothing saved yet
 
         // Difficulty formula: par = base par x (1 - shrink) ^ (difficulty - 1)
         bool cameFromPart = !string.IsNullOrEmpty(PartRepair.CurrentPart);
