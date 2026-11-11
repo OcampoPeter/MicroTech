@@ -1,7 +1,5 @@
 using UnityEngine;
 
-// Step 1: the void. Put this on a big flat cube UNDER the map.
-// Turn on "Is Trigger" on its Box Collider.
 public class KillZone : MonoBehaviour
 {
     [Header("Where the player goes back to")]

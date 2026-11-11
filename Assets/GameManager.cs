@@ -61,8 +61,6 @@ public class GameManager : MonoBehaviour
     [Header("Where Return goes if no scene was remembered")]
     public string fallbackReturnScene = "TS Room";
 
-    // The Return button on the complete screen calls this.
-    // The part you just fixed is saved as fixed, then you go back to the TS room.
     public void ReturnToTS()
     {
         if (State == GameState.Complete)

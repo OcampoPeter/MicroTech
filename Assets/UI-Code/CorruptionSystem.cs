@@ -1,8 +1,6 @@
 using UnityEngine;
 using TMPro;
 
-// Corruption is our health system. 0% = healthy, 100% = the PC crashes.
-// Put this on an empty object called "CorruptionSystem".
 public class CorruptionSystem : MonoBehaviour
 {
     public static CorruptionSystem Instance;

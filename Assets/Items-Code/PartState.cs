@@ -1,11 +1,12 @@
 using UnityEngine;
 
-// Put this on each part in the TS room (RAM, CoolerFan...), on the same object as Grabbable.
-// It shows the part as BROKEN until you finish its maze, then as FIXED.
 public class PartState : MonoBehaviour
 {
     [Header("Must be different for every part, for example RAM or CoolerFan")]
     public string partId = "RAM";
+
+    [Header("How hard this part's maze is (1 = easiest, 5 = hardest)")]
+    [Range(1, 5)] public int difficulty = 1;
 
     [Header("Look: the part's color in each state")]
     public Color brokenColor = new Color(1f, 0.35f, 0.35f);   // reddish

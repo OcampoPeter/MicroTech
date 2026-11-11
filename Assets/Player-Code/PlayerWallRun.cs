@@ -1,6 +1,5 @@
 using UnityEngine;
 
-// Runs before PlayerMovement so IsWallRunning is up to date when movement checks it.
 [DefaultExecutionOrder(-50)]
 public class PlayerWallRun : MonoBehaviour
 {

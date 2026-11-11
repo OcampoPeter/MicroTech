@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PartState
   partId: CoolerFan
+  difficulty: 2
   brokenColor: {r: 1, g: 0.35, b: 0.35, a: 1}
   fixedColor: {r: 0.45, g: 1, b: 0.55, a: 1}
   showWhenBroken: []
