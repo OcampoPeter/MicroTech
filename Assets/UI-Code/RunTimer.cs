@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
 
-// The speedrun timer. Put this on an empty object called "RunTimer".
 public class RunTimer : MonoBehaviour
 {
     public static RunTimer Instance;

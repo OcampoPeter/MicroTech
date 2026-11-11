@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Remembers which PC parts are fixed. It is not on any object: it lives between scenes.
-// Example: finish the RAM maze -> MarkCurrentFixed() -> back in the TS room the RAM shows as fixed.
 public static class PartRepair
 {
     // The part you are fixing right now (set by MapPortal when you enter its maze)
     public static string CurrentPart;
+
+    // How hard the maze you are entering is (1 = easiest). Set by MapPortal from the part's PartState.
+    public static int CurrentDifficulty = 1;
 
     private static readonly HashSet<string> fixedParts = new HashSet<string>();
 
@@ -23,6 +24,7 @@ public static class PartRepair
     {
         fixedParts.Clear();
         CurrentPart = null;
+        CurrentDifficulty = 1;
     }
 
     // Starts every Play session clean (also when Unity skips the domain reload)

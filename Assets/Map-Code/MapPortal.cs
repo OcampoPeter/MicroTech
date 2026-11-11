@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-// Put this on an item that also has Grabbable. Pick it up first (F), then press E to go to its map.
-// Every item can point to a different map, just by typing a different scene name.
 [RequireComponent(typeof(Grabbable))]
 public class MapPortal : MonoBehaviour
 {
@@ -48,6 +46,7 @@ public class MapPortal : MonoBehaviour
         loading = true;
         ReturnScene = SceneManager.GetActiveScene().name;   // remember where we came from
         PartRepair.CurrentPart = part != null ? part.partId : null;   // remember which part we are fixing
+        PartRepair.CurrentDifficulty = part != null ? part.difficulty : 1;   // and how hard its maze is
         Debug.Log("Going to map: " + sceneToLoad);
 
         yield return new WaitForSeconds(loadDelay);

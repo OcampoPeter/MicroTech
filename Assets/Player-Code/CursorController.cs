@@ -2,10 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-// Shift lock with a dot crosshair.
-// Locked: the mouse arrow is hidden and locked, and a dot shows in the middle of the screen.
-// Free: press the toggle key (Left Alt by default) and the normal mouse arrow comes back. Press again to lock.
-// Works in first person and third person. Put this on the Player.
 public class CursorController : MonoBehaviour
 {
     [Header("Toggle")]
