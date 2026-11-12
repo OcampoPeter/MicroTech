@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6392602020505518903
+--- !u!1 &3568926894559609875
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,51 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2028884040326607697}
-  - component: {fileID: 7087017589792581428}
-  - component: {fileID: 6387818063841811473}
-  - component: {fileID: 7697661654660005268}
-  - component: {fileID: 5142219832683586719}
-  - component: {fileID: 145509500090917591}
-  - component: {fileID: 3570681810928574594}
-  - component: {fileID: 1966357764009212197}
+  - component: {fileID: 990548689867558074}
+  - component: {fileID: 163811946807985822}
+  - component: {fileID: 8586470390451825168}
+  - component: {fileID: 1473479801960787572}
+  - component: {fileID: 1020952109926569911}
+  - component: {fileID: 7420563794193123217}
+  - component: {fileID: 3263404658279185742}
   m_Layer: 0
-  m_Name: RAM
+  m_Name: PC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2028884040326607697
+--- !u!4 &990548689867558074
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6392602020505518903}
+  m_GameObject: {fileID: 3568926894559609875}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.06, z: 0}
-  m_LocalScale: {x: 1, y: 1.5, z: 0.6}
+  m_LocalPosition: {x: -6.56, y: 3.64, z: 6.46}
+  m_LocalScale: {x: 0.7, y: 0.8, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7087017589792581428
+--- !u!33 &163811946807985822
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6392602020505518903}
+  m_GameObject: {fileID: 3568926894559609875}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6387818063841811473
+--- !u!23 &8586470390451825168
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6392602020505518903}
+  m_GameObject: {fileID: 3568926894559609875}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -95,13 +94,13 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7697661654660005268
+--- !u!65 &1473479801960787572
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6392602020505518903}
+  m_GameObject: {fileID: 3568926894559609875}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -116,13 +115,13 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &5142219832683586719
+--- !u!54 &1020952109926569911
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6392602020505518903}
+  m_GameObject: {fileID: 3568926894559609875}
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
@@ -143,48 +142,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &145509500090917591
+--- !u!114 &7420563794193123217
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6392602020505518903}
+  m_GameObject: {fileID: 3568926894559609875}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d20c167902525b498a180fd9cb5e9b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Grabbable
-  displayName: Random Access Memory
-  description: ' It is your computer or phone''s short-term memory.'
---- !u!114 &3570681810928574594
+  displayName: PC
+  description: A part of the PC.
+--- !u!114 &3263404658279185742
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6392602020505518903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 492e533a47794a541962889c16ad622d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MapPortal
-  sceneToLoad: RAM
-  interactKey: 19
-  loadDelay: 2
---- !u!114 &1966357764009212197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6392602020505518903}
+  m_GameObject: {fileID: 3568926894559609875}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e884a7c55785fa41ae7f869752ccabc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PartState
   partId: RAM
+  difficulty: 1
   brokenColor: {r: 1, g: 0.35, b: 0.35, a: 1}
   fixedColor: {r: 0.45, g: 1, b: 0.55, a: 1}
   showWhenBroken: []

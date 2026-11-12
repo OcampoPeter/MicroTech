@@ -1106,8 +1106,10 @@ MonoBehaviour:
   parTime: 60
   pointsPerSecondUnderPar: 10
   pointsLostPerFall: 150
+  pointsLostPerCorruptionPercent: 5
   parShrinkPerLevel: 0.1
   scoreBonusPerLevel: 0.25
+  directPlayDifficulty: 0
 --- !u!1 &4834352610834043298
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,12 +1233,11 @@ Transform:
   m_GameObject: {fileID: 6006294009764467405}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.15206, y: -0.05008, z: 1.54244}
+  m_LocalPosition: {x: -1.60296, y: 0.5, z: 17.53701}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 952567639939172250}
-  - {fileID: 6252865355982006205}
   - {fileID: 1326451462176405849}
   - {fileID: 5061438783650777347}
   - {fileID: 8643037796791958025}
@@ -1656,51 +1657,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &7234920700581874899
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6252865355982006205}
-  - component: {fileID: 6613538254888056510}
-  m_Layer: 0
-  m_Name: SceneCameraMode
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6252865355982006205
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7234920700581874899}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.274021, y: 6.79626, z: -17.40189}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8908479734970705394}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6613538254888056510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7234920700581874899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27843ce3c05af044aade4c8535021c76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SceneCameraMode
-  mode: 1
 --- !u!1 &7539230649839581638
 GameObject:
   m_ObjectHideFlags: 0

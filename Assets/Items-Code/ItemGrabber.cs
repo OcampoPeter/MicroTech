@@ -7,10 +7,6 @@ public static class InspectMode
     public static bool Active;
 }
 
-// F = pick up / drop. While you carry an item you can still move around.
-// Q = inspect the item you carry: you stop moving, the arrow is freed, and you can rotate the item
-//     with left mouse + mouse movement. Press Q again to go back to carrying.
-// Put this on the Player and drag the Main Camera into the Cam slot.
 public class ItemGrabber : MonoBehaviour
 {
     [Header("References")]
@@ -29,6 +25,20 @@ public class ItemGrabber : MonoBehaviour
     [Tooltip("How close the item comes to the camera while inspecting.")]
     public float inspectDistance = 1.5f;
     public float rotateSpeed = 0.3f;
+    [Tooltip("Mouse wheel: how much one scroll notch moves the item in or out.")]
+    public float zoomStep = 0.25f;
+    [Tooltip("Closest the item can come to the camera while inspecting.")]
+    public float minInspectDistance = 0.6f;
+    [Tooltip("Furthest the item can go from the camera while inspecting.")]
+    public float maxInspectDistance = 3f;
+
+    [Header("Throw")]
+    [Tooltip("Dropping an item while you move or turn fast throws it. 1 = it keeps your speed, 2 = twice as hard, 0 = it just falls.")]
+    public float throwMultiplier = 1.5f;
+    [Tooltip("The fastest an item can be thrown.")]
+    public float maxThrowSpeed = 18f;
+    [Tooltip("Dropping slower than this just lets the item fall.")]
+    public float minThrowSpeed = 1.5f;
 
     // Other scripts can check this while the item is being rotated
     public static bool IsRotatingItem;
@@ -41,6 +51,9 @@ public class ItemGrabber : MonoBehaviour
     private bool heldWasKinematic;
     private PlayerMovement movement;
     private PlayerWallRun wallRun;
+    private float currentInspectDistance;   // changes with the mouse wheel
+    private Vector3 lastHeldPosition;        // used to measure how fast the held item moves
+    private Vector3 heldVelocity;            // that speed, smoothed. This is what a throw uses.
 
     void Start()
     {
@@ -77,10 +90,30 @@ public class ItemGrabber : MonoBehaviour
 
         if (held != null)
         {
+            // Mouse wheel zooms the item in and out (inspect mode only). Scroll up = closer.
+            if (InspectMode.Active)
+            {
+                float scroll = Mouse.current.scroll.ReadValue().y;
+                if (Mathf.Abs(scroll) > 0.01f)
+                {
+                    currentInspectDistance -= Mathf.Sign(scroll) * zoomStep;
+                    currentInspectDistance = Mathf.Clamp(currentInspectDistance, minInspectDistance, maxInspectDistance);
+                }
+            }
+
             // Float to the point in front of the camera (closer while inspecting)
-            float distance = InspectMode.Active ? inspectDistance : holdDistance;
+            float distance = InspectMode.Active ? currentInspectDistance : holdDistance;
             Vector3 target = cam.transform.position + cam.transform.forward * distance;
-            held.transform.position = Vector3.Lerp(held.transform.position, target, followSpeed * Time.deltaTime);
+            Vector3 newPosition = Vector3.Lerp(held.transform.position, target, followSpeed * Time.deltaTime);
+            held.transform.position = newPosition;
+
+            // Measure how fast the item is moving (because you walk or swing the camera)
+            if (Time.deltaTime > 0f)
+            {
+                Vector3 speedNow = (newPosition - lastHeldPosition) / Time.deltaTime;
+                heldVelocity = Vector3.Lerp(heldVelocity, speedNow, 0.25f);
+            }
+            lastHeldPosition = newPosition;
 
             // Left mouse + mouse movement rotates the item (inspect mode only)
             if (IsRotatingItem)
@@ -95,6 +128,7 @@ public class ItemGrabber : MonoBehaviour
     void EnterInspect()
     {
         InspectMode.Active = true;
+        currentInspectDistance = inspectDistance;   // every inspect starts at the normal distance
 
         // Freeze the player
         if (movement != null)
@@ -155,6 +189,8 @@ public class ItemGrabber : MonoBehaviour
 
         held = item;
         held.IsHeld = true;
+        lastHeldPosition = held.transform.position;   // start measuring from here
+        heldVelocity = Vector3.zero;
         heldBody = item.GetComponent<Rigidbody>();
         if (heldBody != null)
         {
@@ -168,7 +204,27 @@ public class ItemGrabber : MonoBehaviour
     {
         if (InspectMode.Active) ExitInspect();   // dropping also ends inspecting
 
-        if (heldBody != null) heldBody.isKinematic = heldWasKinematic;
+        if (heldBody != null)
+        {
+            heldBody.isKinematic = heldWasKinematic;
+
+            if (!heldBody.isKinematic)
+            {
+                // Throw: the item keeps the speed it had in your hands
+                Vector3 throwVelocity = heldVelocity * throwMultiplier;
+                if (throwVelocity.magnitude >= minThrowSpeed)
+                {
+                    throwVelocity = Vector3.ClampMagnitude(throwVelocity, maxThrowSpeed);
+                    heldBody.linearVelocity = throwVelocity;
+                    heldBody.angularVelocity = Random.insideUnitSphere * Mathf.Min(throwVelocity.magnitude, 10f) * 0.4f;   // a little tumble
+                }
+                else
+                {
+                    heldBody.linearVelocity = Vector3.zero;
+                }
+            }
+        }
+        heldVelocity = Vector3.zero;
         held.IsHeld = false;
         Debug.Log("Dropped: " + held.displayName);
         held = null;
