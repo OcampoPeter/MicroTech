@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     public float accelerationRate = 18f;     // How fast the sprint speed builds up
     public float decelerationRate = 14f;     // How fast it falls back down
     public float modelRotationOffset = 180f;
+    [Tooltip("Turn the character to face where it walks. CameraModeSwitcher turns this off in first person.")]
+    public bool rotateToMovement = true;
 
     [Header("Smoothness")]
     [Tooltip("How quickly you reach your target speed on the ground. Higher = snappier, lower = smoother.")]
@@ -32,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Gravity & Jump")]
     public float gravity = -19.62f;
     public float jumpHeight = 2.5f;
+    [Tooltip("Turn off to stop the player from jumping (the TS room does this through SceneCameraMode).")]
+    public bool canJump = true;
     [Tooltip("Grace time after leaving the ground where you can still jump.")]
     public float coyoteTime = 0.12f;
     [Tooltip("How long a jump press is remembered if you pressed it a moment too early.")]
@@ -178,9 +182,14 @@ public class PlayerMovement : MonoBehaviour
 
             desiredVelocity = moveDir.normalized * (currentSpeed + airBonus);
 
-            // Turn the model gradually instead of snapping
-            Quaternion targetRotation = Quaternion.Euler(0f, targetAngle + modelRotationOffset, 0f);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            // Turn the model gradually instead of snapping.
+            // Not in first person: the camera is part of the player there, so turning the player turns the camera,
+            // and the player would keep chasing its own view in circles.
+            if (rotateToMovement)
+            {
+                Quaternion targetRotation = Quaternion.Euler(0f, targetAngle + modelRotationOffset, 0f);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
         }
 
         // Move the real speed toward the wanted speed. This is what makes it smooth.
@@ -197,7 +206,7 @@ public class PlayerMovement : MonoBehaviour
         // Jump (with a little grace time so it never feels like it ignored you)
         bool jumpBuffered = Time.time - lastJumpPressedTime <= jumpBufferTime;
         bool recentlyGrounded = Time.time - lastGroundedTime <= coyoteTime;
-        if (jumpBuffered && recentlyGrounded)
+        if (jumpBuffered && recentlyGrounded && canJump)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             // Use up both timers so one press can't trigger two jumps
