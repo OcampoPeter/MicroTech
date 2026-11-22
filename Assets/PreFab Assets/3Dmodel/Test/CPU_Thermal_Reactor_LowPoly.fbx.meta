@@ -1,0 +1,83 @@
+fileFormatVersion: 2
+guid: aff64e8f704380bc8f1e530be754e7dd
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Reactor_30373d
+    second: {fileID: 2100000, guid: 090ffd61058049539ed3f40cc3712a70, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Reactor_434f58
+    second: {fileID: 2100000, guid: a439f34ad991f700c5140821f8d28101, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Reactor_ff701c
+    second: {fileID: 2100000, guid: 63490f81bb07a3de91042954324b880a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Reactor_1c232a
+    second: {fileID: 2100000, guid: b0d29d11a76513f723b3357fc93b801e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Reactor_ffbe30
+    second: {fileID: 2100000, guid: 1732de5de4020ab42e8b58b0e81d0d97, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Reactor_26cdff
+    second: {fileID: 2100000, guid: 0de7363dcd5de8e919e95064f47d3ec4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Reactor_1c5c91
+    second: {fileID: 2100000, guid: de0f1c4dea4b8ae707cbf7dea8bd9618, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Reactor_697784
+    second: {fileID: 2100000, guid: fe481cbc7fed6d20995ff443117df18f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Reactor_2b333c
+    second: {fileID: 2100000, guid: 4fa6199e6ea91442a91ce306c5560bc6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Reactor_aab8c2
+    second: {fileID: 2100000, guid: 2cae3e0f32e2efc9bb960d424e658264, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Reactor_be9137
+    second: {fileID: 2100000, guid: 3c78a045bb738e98ee0eff1e860ae63e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Reactor_be302a
+    second: {fileID: 2100000, guid: 6e2cc86b2f668209714ee07bcdfcf6d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Reactor_37a0cd
+    second: {fileID: 2100000, guid: a971db17acd9fe26107100542a38b1bf, type: 2}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  meshes:
+    generateSecondaryUV: 0
+    addCollider: 1
+  importNormals: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

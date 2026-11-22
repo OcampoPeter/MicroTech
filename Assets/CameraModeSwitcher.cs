@@ -55,6 +55,9 @@ public class CameraModeSwitcher : MonoBehaviour
             PlayerMovement movement = GetComponent<PlayerMovement>();
             if (movement != null) movement.canJump = !isTsScene;
 
+            // Dash, slide, crouch and climb are not in the project right now.
+            // We add their lines back here one by one as each move is rebuilt.
+
             Debug.Log("Scene '" + sceneName + "' -> " + chosen.ToString() + ", jumping " + (!isTsScene ? "on" : "off"));
         }
 
