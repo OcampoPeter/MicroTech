@@ -1,0 +1,87 @@
+using UnityEngine;
+using TMPro;
+
+// The speedrun timer. Put this on an empty object called "RunTimer".
+public class RunTimer : MonoBehaviour
+{
+    public static RunTimer Instance;
+
+    [Header("UI")]
+    public TMP_Text timerText;
+    [Tooltip("A second text placed next to the timer. It shows +3s when a hazard hits.")]
+    public TMP_Text penaltyText;
+    [Tooltip("How long the +3s stays on screen (seconds).")]
+    public float penaltyShowTime = 1.5f;
+
+    public float Time_ { get; private set; }   // seconds on the clock
+    public float PenaltyTotal { get; private set; }
+
+    private float penaltyShownAt = -10f;
+    private bool stopped;
+
+    void Awake() { Instance = this; }
+
+    // Turns seconds into  hours:minutes:seconds.hundredths   (example: 375.6 -> 0:06:15.60)
+    // Public and static, so any other script can use it: RunTimer.FormatTime(seconds)
+    public static string FormatTime(float seconds, bool showHundredths = true)
+    {
+        if (seconds < 0f) seconds = 0f;
+        int total = Mathf.FloorToInt(seconds * 100f);   // everything in hundredths of a second
+        int hundredths = total % 100;
+        int secs = (total / 100) % 60;
+        int mins = (total / 6000) % 60;
+        int hours = total / 360000;
+
+        string text = hours.ToString() + ":" + mins.ToString("00") + ":" + secs.ToString("00");
+        if (showHundredths) text += "." + hundredths.ToString("00");
+        return text;
+    }
+
+    void Start()
+    {
+        if (penaltyText != null) penaltyText.text = "";
+    }
+
+    void Update()
+    {
+        if (!stopped) Time_ += Time.deltaTime;
+        if (timerText != null)
+            timerText.text = "TIME " + FormatTime(Time_);
+
+        // Fade the +3s out after it appears
+        if (penaltyText != null)
+        {
+            float age = Time.time - penaltyShownAt;
+            if (age < penaltyShowTime)
+            {
+                Color c = penaltyText.color;
+                c.a = 1f - (age / penaltyShowTime);
+                penaltyText.color = c;
+            }
+            else
+            {
+                penaltyText.text = "";
+            }
+        }
+    }
+
+    // Used by the finish line: freezes the clock
+    public void Stop()
+    {
+        stopped = true;
+    }
+
+    // Used by hazards: adds seconds to the clock as a penalty
+    public void AddPenalty(float seconds)
+    {
+        Time_ += seconds;
+        PenaltyTotal += seconds;
+
+        if (penaltyText != null)
+        {
+            penaltyText.text = "+" + seconds.ToString("F0") + "s";
+            penaltyText.color = Color.red;
+            penaltyShownAt = Time.time;
+        }
+    }
+}
